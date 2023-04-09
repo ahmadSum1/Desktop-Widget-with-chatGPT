@@ -38,7 +38,12 @@ def check_data():
         
         return json_data
     # If no data is received just return None
-    except socket.error:
+    except socket.error as e:
+        print("Bad socket!", e)
+        return None
+    
+    except Exception as e:
+        print("Bad Json?", e)
         return None
 
 class MyWidget:
@@ -101,14 +106,11 @@ class MyWidget:
         # Check for UDP data
         data = check_data()
         if data is not None:
-            
-            # for key, value in data.items():
-            #     print(key, value)
-            
             self.data_label.config(text=fjson.dumps(data, float_format=".2f", indent=4, ), font=("Segoe UI", 22), justify='left')
             # Schedule the next refresh in 1 second
             self.parent.after(1000, self.refresh_data)
         else:
+            # Schedule the next refresh in 100 millisecond
             self.parent.after(100, self.refresh_data)
 
 # Create the main tkinter window
