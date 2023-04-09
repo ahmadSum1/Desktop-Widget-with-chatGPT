@@ -121,7 +121,8 @@ root = tk.Tk()
 # Set the initial position of the window to the top-right corner of the screen
 screen_width = root.winfo_screenwidth()
 x = screen_width - root.winfo_reqwidth()
-root.geometry("+%d+0" % x)
+# root.geometry("+%d+0" % x)
+root.geometry("-1-1")
 
 # Create the widget and add it to the window
 widget = MyWidget(root)
